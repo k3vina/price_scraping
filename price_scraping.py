@@ -1,6 +1,7 @@
 import requests
 from requests.exceptions import HTTPError, Timeout
 from bs4 import BeautifulSoup
+import pandas as pd
 
 try:
     api_url = "https://v6.exchangerate-api.com/v6/a5a0f70d5a3e8a3acc871a24/latest/KES"
@@ -46,7 +47,7 @@ try:
     all_scraped_items = []                  
 
     for item in items[:10]:                      # limit to first 10
-        title = item.select_one(".itm col").text
+        title = item.select_one(".name").text
         price_text = item.select_one(".prc").text   # e.g. "KSh 1,080"
 
         price_kes = float(price_text.replace("KSh", "").replace(",", "").split("-")[0].strip())
@@ -55,7 +56,7 @@ try:
         item_dict = {
             "product_title": title,
             "price_kes": price_kes,
-            "price_gbp": round(price_gbp, 2),
+            "price_gbp": round(price_usd, 2),
         }
 
         all_scraped_items.append(item_dict)

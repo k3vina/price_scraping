@@ -3,8 +3,21 @@ from requests.exceptions import HTTPError, Timeout
 from bs4 import BeautifulSoup
 
 try:
+    api_url = "https://v6.exchangerate-api.com/v6/a5a0f70d5a3e8a3acc871a24/latest/KES"
 
-   
+    api_response = requests.get(api_url)
+
+    api_response.raise_for_status()
+    #print(api_response.status_code)
+    #print(api_response.text[:200])  # just the first 200 chars, not the whole HTML page
+
+    data = api_response.json()
+    #print(data.keys())
+ 
+    usd_rate = data["conversion_rates"]["USD"]
+    print(f"KES to USD rate: {usd_rate}")
+
+
     url = "https://www.jumia.co.ke/"
 
     headers = {

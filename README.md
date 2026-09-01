@@ -28,7 +28,7 @@ A Python script that scrapes product prices from [Jumia Kenya](https://www.jumia
 
 1. Clone this repository:
 ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/k3vina/price_scraping
     cd price_scraper
 ```
 
